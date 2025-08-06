@@ -20,5 +20,6 @@ target
 #  option (not recommended) you can uncomment the following to ignore the entire idea folder.
 #.idea/
 bazel-bin
-bazel-*
+bazel-out
+bazel-testlogs
 rust-project.json

@@ -1,13 +1,16 @@
-load("@crate_index//:defs.bzl", "aliases", "all_crate_deps")
-load("@rules_rust//rust:defs.bzl", "rust_binary")
+load("@crates//:defs.bzl", "aliases", "all_crate_deps")
+load("@rules_rust//rust:defs.bzl", "rust_binary", "rust_library")
+load("@rules_cc//cc:defs.bzl", "cc_library", "cc_binary")
+load("//tools/bazel:rust_cxx_bridge.bzl", "rust_cxx_bridge")
 
 package(default_visibility = ["//visibility:public"])
 
-rust_binary(
-    name = "main",
-    srcs = ["src/main.rs"],
-    edition = "2021", 
+rust_library(
+    name = "rustlib",
+    edition = "2024",
+    visibility = ["//visibility:public"],
     aliases = aliases(),
+    srcs = glob(["src/**/*.rs"]),
     deps = all_crate_deps(
         normal = True,
     ),
@@ -15,3 +18,18 @@ rust_binary(
         proc_macro = True,
     ),
 )
+
+rust_cxx_bridge(
+    name = "bridge",
+    src = "src/bridge.rs",
+    deps = [
+        ":rustlib"
+    ]
+)
+
+# cc_library(
+#     name = "ccc",
+#     srcs = ["cpp/bridge.rs.h", "cpp/bridge.rs.cc"],
+#     deps = [":bridge"],
+#     linkstatic = True,
+# )

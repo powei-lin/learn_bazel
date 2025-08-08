@@ -4,3 +4,29 @@
 #
 # For more details, please check https://github.com/bazelbuild/bazel/issues/18958
 ###############################################################################
+module(
+    name = "learn_bazel",
+    version = "0.1.0",
+)
+
+bazel_dep(name = "rules_rust", version = "0.63.0")
+bazel_dep(name = "cxx.rs", version = "1.0.165")
+bazel_dep(name = "opencv", version = "4.11.0.bcr.2")
+
+rust = use_extension("@rules_rust//rust:extensions.bzl", "rust")
+rust.toolchain(
+    edition = "2024",
+)
+
+crate = use_extension("@rules_rust//crate_universe:extensions.bzl", "crate")
+
+crate.from_cargo(
+    name = "crates",
+    cargo_lockfile = "//:Cargo.lock",
+    manifests = [
+        "//:Cargo.toml",
+        "//modules/lib_a:Cargo.toml",
+        "//modules/lib_cxx:Cargo.toml",
+    ],
+)
+use_repo(crate, "crates")

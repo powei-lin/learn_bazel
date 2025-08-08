@@ -27,9 +27,17 @@ rust_cxx_bridge(
     ]
 )
 
-# cc_library(
-#     name = "ccc",
-#     srcs = ["cpp/bridge.rs.h", "cpp/bridge.rs.cc"],
-#     deps = [":bridge"],
-#     linkstatic = True,
-# )
+cc_library(
+    name = "ftheta",
+    srcs = glob([
+        "cpp/*.cpp",
+    ]),
+    hdrs = glob([
+        "cpp/*.h",
+    ]),
+    deps = [
+        ":bridge",
+        "@opencv//:opencv",
+    ],
+    linkstatic = True,
+)

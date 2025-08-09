@@ -16,7 +16,11 @@ bazel_dep(name = "opencv", version = "4.11.0.bcr.2")
 rust = use_extension("@rules_rust//rust:extensions.bzl", "rust")
 rust.toolchain(
     edition = "2024",
+    versions = ["1.86.0"]
 )
+# use_repo(rust, "rust_toolchains")
+
+# register_toolchains("@rust_toolchains//:all")
 
 crate = use_extension("@rules_rust//crate_universe:extensions.bzl", "crate")
 

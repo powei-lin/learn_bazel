@@ -39,5 +39,6 @@ cc_library(
         ":bridge",
         "@opencv//:opencv",
     ],
+    includes = ["../"],
     linkstatic = True,
 )

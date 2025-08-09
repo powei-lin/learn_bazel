@@ -138,7 +138,7 @@
           "@@//modules/lib_cxx/Cargo.toml": "1574103ab0cc1a667601c47105619486978acaa1907424ed7668e791f8c2c886",
           "@@//Cargo.toml": "b0d0046e6550242b8a4f5b703f390fa0601c6a7071f1ccf94223ee50d4193a1e",
           "@@//Cargo.lock": "98145035ed584ae2c894721d0bcb4e97b17006ed24f159ba766e67ff46a79d5f",
-          "@@//MODULE.bazel": "d9221ff6fd213e52c9ef3b2db421278be53f97fc337769de0681b21d6d2cd7da",
+          "@@//MODULE.bazel": "ff7a85144761c3a78499d04e96e44d5ea17c93cc415644ae69287297495856de",
           "@@rules_rust~~rust_host_tools~rust_host_tools//rust_host_tools": "ENOENT",
           "@@//modules/lib_a/Cargo.toml": "fb379ee2758042299228a46417c2e760abf870d17c514c78ecc5b22012cc4d55"
         },

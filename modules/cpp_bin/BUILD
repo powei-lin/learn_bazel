@@ -6,8 +6,8 @@ cc_binary(
     name = "main",
     srcs = ["main.cpp"],
     deps = [
-        "//modules/lib_cxx:bridge",
+        # "//modules/lib_cxx:bridge",
         "//modules/lib_cxx:ftheta",
-        "@opencv//:opencv",
+        # "@opencv//:opencv",
     ],
 )

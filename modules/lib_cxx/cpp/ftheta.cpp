@@ -6,15 +6,21 @@ using namespace cv;
 using namespace std;
 
 namespace ftheta {
-void initUndistort(InputArray img) {
+void initUndistort(InputArray img, OutputArray map1) {
   cv::Mat mat = img.getMat();
-  if (mat.type() != CV_32F) {
-    mat.convertTo(mat, CV_32F);
+  if (mat.type() != CV_32FC3) {
+    mat.convertTo(mat, CV_32FC3);
   }
   std::vector<float> out;
   out.assign((float *)mat.datastart, (float *)mat.dataend);
   print_vec(out);
-  // cout << "abc " << m.channels() << endl;
+  cv::Mat mat1(img.rows(), img.cols(), CV_32FC3,
+               (void *)out.data()); // wrap without copy
+
+  Mat map1_map = map1.getMat();
+  mat1.copyTo(map1_map);
+
+  map1_map.convertTo(map1, CV_8UC3);
 }
 void initUndistortRectifyMap(InputArray _cameraMatrix, InputArray _distCoeffs,
                              InputArray _matR, InputArray _newCameraMatrix,

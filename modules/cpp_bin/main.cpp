@@ -14,7 +14,10 @@ int main(){
 
     // Draw the circle
     cv::circle(image, center, radius, color, thickness);
-    cv::Mat image2(3, 3, CV_8UC3, cv::Scalar(0, 255, 105));
-    ftheta::initUndistort(image2);
+    cv::Mat image2(300, 200, CV_8UC3, cv::Scalar(0, 255, 105));
+    cv::Mat mapx;
+    ftheta::initUndistort(image2, mapx);
+    cv::imwrite("aaa.jpg", image2);
+    cv::imwrite("aaa1.jpg", mapx);
     return 0;
 }

@@ -3,7 +3,7 @@
 #include <opencv2/core/mat.hpp>
 
 namespace ftheta {
-void initUndistort(cv::InputArray img);
+void initUndistort(cv::InputArray img, cv::OutputArray map1);
 void initUndistortRectifyMap(cv::InputArray cameraMatrix,
                              cv::InputArray distCoeffs, cv::InputArray R,
                              cv::InputArray newCameraMatrix, cv::Size size,

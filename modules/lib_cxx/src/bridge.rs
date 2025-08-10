@@ -15,13 +15,11 @@ pub fn say_hello() {
 }
 
 fn print_vec(vec: Pin<&mut CxxVector<f32>>) {
-    vec
-        .iter_mut()
-        .for_each(|i|{
-            println!("{}", i);
-            unsafe {
-                let a = i.get_unchecked_mut();
-                *a = 255.0 - *a;
-            }
-        });
+    vec.iter_mut().for_each(|i| {
+        println!("{}", i);
+        unsafe {
+            let a = i.get_unchecked_mut();
+            *a = 255.0 - *a;
+        }
+    });
 }

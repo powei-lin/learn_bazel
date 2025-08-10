@@ -1,6 +1,7 @@
 #include "ftheta.h"
 #include "lib_cxx/src/bridge.rs.h"
 #include <iostream>
+#include <vector>
 
 using namespace cv;
 using namespace std;
@@ -21,6 +22,17 @@ void initUndistort(InputArray img, OutputArray map1) {
   mat1.copyTo(map1_map);
 
   map1_map.convertTo(map1, CV_8UC3);
+  std::vector<cv::Point3f> objectPoints;
+  objectPoints.emplace_back(0.0f, 0.0f, 0.0f);
+  objectPoints.emplace_back(1.0f, 2.0f, 3.1f);
+  InputArray aa = objectPoints;
+  Mat am = aa.getMat();
+  cout << am.rows << " " << am.cols << " " << am.channels() << endl;
+  std::vector<float> vec;
+  vec.assign((float *)am.datastart, (float *)am.dataend);
+  for (const auto &i : vec) {
+    cout << i << endl;
+  }
 }
 void initUndistortRectifyMap(InputArray _cameraMatrix, InputArray _distCoeffs,
                              InputArray _matR, InputArray _newCameraMatrix,
@@ -68,3 +80,5 @@ void projectPoints(cv::InputArray _objectPoints, cv::InputArray rvec,
   // int count = total / 3;
 }
 } // namespace ftheta
+
+void projectPointsImpl(std::vector<float> &obj_points) {}

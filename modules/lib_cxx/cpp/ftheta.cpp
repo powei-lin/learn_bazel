@@ -6,6 +6,12 @@
 using namespace cv;
 using namespace std;
 
+void projectPointsImpl(std::vector<float> &obj_points) {
+  vector<float> camera, distortion;
+  vector<float> p2ds(obj_points.size() / 3 * 2, 0.0);
+  project_points_impl(camera, distortion, obj_points, p2ds);
+}
+
 namespace ftheta {
 void initUndistort(InputArray img, OutputArray map1) {
   cv::Mat mat = img.getMat();
@@ -33,6 +39,7 @@ void initUndistort(InputArray img, OutputArray map1) {
   for (const auto &i : vec) {
     cout << i << endl;
   }
+  projectPointsImpl(vec);
 }
 void initUndistortRectifyMap(InputArray _cameraMatrix, InputArray _distCoeffs,
                              InputArray _matR, InputArray _newCameraMatrix,
@@ -80,5 +87,3 @@ void projectPoints(cv::InputArray _objectPoints, cv::InputArray rvec,
   // int count = total / 3;
 }
 } // namespace ftheta
-
-void projectPointsImpl(std::vector<float> &obj_points) {}

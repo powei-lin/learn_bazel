@@ -10,3 +10,4 @@ crate-type = ["staticlib"]
 anyhow = "1.0.98"
 cxx = "1.0.165"
 glam = "0.30.5"
+rayon = "1.10.0"

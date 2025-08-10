@@ -9,6 +9,7 @@ def rust_cxx_bridge(name, src, deps = [], linkstatic = True, **kwargs):
         name (string): The name of the new target
         src (string): The rust source file to generate a bridge for
         deps (list, optional): A list of dependencies for the underlying cc_library. Defaults to [].
+        linkstatic: static link.
         **kwargs: Common arguments to pass through to underlying rules.
     """
     native.alias(

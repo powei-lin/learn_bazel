@@ -1,7 +1,9 @@
 #include "ftheta.h"
-#include "lib_cxx/src/bridge.rs.h"
+
 #include <iostream>
 #include <vector>
+
+#include "lib_cxx/src/bridge.rs.h"
 
 using namespace cv;
 using namespace std;
@@ -22,7 +24,7 @@ void initUndistort(InputArray img, OutputArray map1) {
   out.assign((float *)mat.datastart, (float *)mat.dataend);
   print_vec(out);
   cv::Mat mat1(img.rows(), img.cols(), CV_32FC3,
-               (void *)out.data()); // wrap without copy
+               (void *)out.data());  // wrap without copy
 
   Mat map1_map = map1.getMat();
   mat1.copyTo(map1_map);
@@ -41,16 +43,12 @@ void initUndistort(InputArray img, OutputArray map1) {
   }
   projectPointsImpl(vec);
 }
-void initUndistortRectifyMap(InputArray _cameraMatrix, InputArray _distCoeffs,
-                             InputArray _matR, InputArray _newCameraMatrix,
-                             Size size, int m1type, OutputArray _map1,
-                             OutputArray _map2) {
-
+void initUndistortRectifyMap(InputArray _cameraMatrix, InputArray _distCoeffs, InputArray _matR,
+                             InputArray _newCameraMatrix, Size size, int m1type, OutputArray _map1, OutputArray _map2) {
   Mat cameraMatrix = _cameraMatrix.getMat(), distCoeffs = _distCoeffs.getMat();
   Mat matR = _matR.getMat(), newCameraMatrix = _newCameraMatrix.getMat();
 
-  if (m1type <= 0)
-    m1type = CV_16SC2;
+  if (m1type <= 0) m1type = CV_16SC2;
   CV_Assert(m1type == CV_16SC2 || m1type == CV_32FC1 || m1type == CV_32FC2);
   _map1.create(size, m1type);
   Mat map1 = _map1.getMat(), map2;
@@ -63,8 +61,7 @@ void initUndistortRectifyMap(InputArray _cameraMatrix, InputArray _distCoeffs,
   Mat_<double> R = Mat_<double>::eye(3, 3);
   Mat_<double> A = Mat_<double>(cameraMatrix), Ar;
 }
-void projectPoints(cv::InputArray _objectPoints, cv::InputArray rvec,
-                   cv::InputArray tvec, cv::InputArray cameraMatrix,
+void projectPoints(cv::InputArray _objectPoints, cv::InputArray rvec, cv::InputArray tvec, cv::InputArray cameraMatrix,
                    cv::InputArray distCoeffs, cv::OutputArray imagePoints) {
   Mat _m, objectPoints = _objectPoints.getMat();
   // Mat dpdr, dpdt, dpdc, dpdf, dpdk, dpdo;
@@ -86,4 +83,4 @@ void projectPoints(cv::InputArray _objectPoints, cv::InputArray rvec,
   // int total = (int)(objectPoints.total() * objectPoints.channels());
   // int count = total / 3;
 }
-} // namespace ftheta
+}  // namespace ftheta
